@@ -71,6 +71,42 @@ class EntryWithPlaceholder(Entry):
             self.put_placeholder()
 
 
+class ScrolledTextWithPlaceholder(scrolledtext.ScrolledText):
+    def __init__(
+            self,
+            master=None,
+            placeholder="PLACEHOLDER",
+            color='grey',
+            **options):
+        super().__init__(master, **options)
+
+        self.placeholder = placeholder
+        self.placeholder_color = color
+        self.default_fg_color = self['fg']
+
+        self.bind("<FocusIn>", self.foc_in)
+        self.bind("<FocusOut>", self.foc_out)
+
+        self.put_placeholder()
+    
+    def delete(self, index1, index2) -> None:
+        self['fg'] = self.default_fg_color
+        return super().delete(index1, index2=index2)
+
+    def put_placeholder(self):
+        self.insert('1.0', self.placeholder)
+        self['fg'] = self.placeholder_color
+
+    def foc_in(self, *args):
+        if self['fg'] == self.placeholder_color:
+            self.delete('1.0', 'end')
+            self['fg'] = self.default_fg_color
+
+    def foc_out(self, *args):
+        if not self.get('1.0', END):
+            self.put_placeholder()
+
+
 class Window():
     def __init__(self) -> None:
 
@@ -85,9 +121,9 @@ class Window():
         self.textframe.pack()
         self.passframe = Frame(self.window)
         self.passframe.pack()
-        self.text = scrolledtext.ScrolledText(self.textframe)
+        self.text = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
         self.text.pack(side=LEFT)
-        self.text2 = scrolledtext.ScrolledText(self.textframe)
+        self.text2 = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
         self.text2.pack(side=RIGHT)
         self.butframe = Frame(self.textframe)
         self.encrypt_button = Button(
