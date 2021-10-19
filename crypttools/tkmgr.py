@@ -62,7 +62,7 @@ class EntryWithPlaceholder(Entry):
 
     def foc_in(self, *args):
         if self['fg'] == self.placeholder_color:
-            self.delete('0', 'end')
+            self.delete('0', END)
             self['fg'] = self.default_fg_color
             self.config(show='*')
 
@@ -99,7 +99,7 @@ class ScrolledTextWithPlaceholder(scrolledtext.ScrolledText):
 
     def foc_in(self, *args):
         if self['fg'] == self.placeholder_color:
-            self.delete('1.0', 'end')
+            self.delete('1.0', END)
             self['fg'] = self.default_fg_color
 
     def foc_out(self, *args):
