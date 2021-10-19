@@ -117,10 +117,16 @@ class Window():
         # contents are placed in window
         self.window = Toplevel(self.root)
         self.window.title("Encrypter")
+
+        # upper row with decrypted/encrypted texts and buttons
         self.textframe = Frame(self.window)
         self.textframe.pack()
+
+        # lower row with password textbox
         self.passframe = Frame(self.window)
         self.passframe.pack()
+
+        # upper row
         self.decrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
         self.decrpt_box.pack(side=LEFT)
         self.encrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
@@ -128,14 +134,10 @@ class Window():
         self.butframe = Frame(self.textframe)
         self.encrypt_button = Button(
             self.butframe, text="->",
-            command=lambda: self.encrypt(
-                self.decrpt_box.get('1.0', END),
-                self.pswdbox.get()))
+            command=lambda: self.encrypt(self.decrpt_box.get('1.0', END), self.pswdbox.get()))
         self.decrypt_button = Button(
             self.butframe, text="<-",
-            command=lambda: self.decrypt(
-                self.encrpt_box.get('1.0', END),
-                self.pswdbox.get()))
+            command=lambda: self.decrypt(self.encrpt_box.get('1.0', END), self.pswdbox.get()))
         self.exit_button = Button(
             self.butframe, text="x",
             command=self.root.destroy)
@@ -143,6 +145,8 @@ class Window():
         self.encrypt_button.pack()
         self.decrypt_button.pack()
         self.exit_button.pack()
+
+        # lower row
         self.pswdbox = EntryWithPlaceholder(self.passframe, 'password')
         self.pswdbox.pack()
   
