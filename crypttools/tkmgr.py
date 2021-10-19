@@ -1,5 +1,6 @@
 from tkinter import (
     Button,
+    END,
     Entry,
     Frame,
     LEFT,
@@ -69,6 +70,23 @@ class Window():
         self.pswdbox = Entry(self.passframe, show='*')
         self.pswdbox.pack()
   
+    def encrypt(self, text, pswd) -> None:
+        text = text.rstrip('\n')
+        encrypted = encrypt(
+            pswd.encode('utf-8'),
+            text.encode('utf-8'),
+            encode=True)
+        self.text2.delete('1.0', END)
+        self.text2.insert('1.0', encrypted)
+
+    def decrypt(self, text, pswd) -> None:
+        encrypted = decrypt(
+            pswd.encode('utf-8'),
+            text,
+            decode=True)
+        self.text.delete('1.0', END)
+        self.text.insert('1.0', encrypted.decode('utf-8'))
+
     def start_loop(self) -> None:
         self.window.protocol('WM_DELETE_WINDOW', self.root.destroy)
         self.root.mainloop()
