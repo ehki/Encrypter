@@ -121,20 +121,20 @@ class Window():
         self.textframe.pack()
         self.passframe = Frame(self.window)
         self.passframe.pack()
-        self.text = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
-        self.text.pack(side=LEFT)
-        self.text2 = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
-        self.text2.pack(side=RIGHT)
+        self.decrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
+        self.decrpt_box.pack(side=LEFT)
+        self.encrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
+        self.encrpt_box.pack(side=RIGHT)
         self.butframe = Frame(self.textframe)
         self.encrypt_button = Button(
             self.butframe, text="->",
             command=lambda: self.encrypt(
-                self.text.get('1.0', END),
+                self.decrpt_box.get('1.0', END),
                 self.pswdbox.get()))
         self.decrypt_button = Button(
             self.butframe, text="<-",
             command=lambda: self.decrypt(
-                self.text2.get('1.0', END),
+                self.encrpt_box.get('1.0', END),
                 self.pswdbox.get()))
         self.exit_button = Button(
             self.butframe, text="x",
@@ -152,16 +152,16 @@ class Window():
             pswd.encode('utf-8'),
             text.encode('utf-8'),
             encode=True)
-        self.text2.delete('1.0', END)
-        self.text2.insert('1.0', encrypted)
+        self.encrpt_box.delete('1.0', END)
+        self.encrpt_box.insert('1.0', encrypted)
 
     def decrypt(self, text, pswd) -> None:
         encrypted = decrypt(
             pswd.encode('utf-8'),
             text,
             decode=True)
-        self.text.delete('1.0', END)
-        self.text.insert('1.0', encrypted.decode('utf-8'))
+        self.decrpt_box.delete('1.0', END)
+        self.decrpt_box.insert('1.0', encrypted.decode('utf-8'))
 
     def start_loop(self) -> None:
         self.window.protocol('WM_DELETE_WINDOW', self.root.destroy)
