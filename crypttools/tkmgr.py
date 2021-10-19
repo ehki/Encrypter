@@ -58,9 +58,15 @@ class Window():
         self.text2.pack(side=RIGHT)
         self.butframe = Frame(self.textframe)
         self.encrypt_button = Button(
-            self.butframe, text="->")
+            self.butframe, text="->",
+            command=lambda: self.encrypt(
+                self.text.get('1.0', END),
+                self.pswdbox.get()))
         self.decrypt_button = Button(
-            self.butframe, text="<-")
+            self.butframe, text="<-",
+            command=lambda: self.decrypt(
+                self.text2.get('1.0', END),
+                self.pswdbox.get()))
         self.exit_button = Button(
             self.butframe, text="x")
         self.butframe.pack()
