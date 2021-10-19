@@ -68,7 +68,8 @@ class Window():
                 self.text2.get('1.0', END),
                 self.pswdbox.get()))
         self.exit_button = Button(
-            self.butframe, text="x")
+            self.butframe, text="x",
+            command=self.root.destroy)
         self.butframe.pack()
         self.encrypt_button.pack()
         self.decrypt_button.pack()
