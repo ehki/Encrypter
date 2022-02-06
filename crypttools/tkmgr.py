@@ -111,6 +111,7 @@ class ScrolledTextWithPlaceholder(scrolledtext.ScrolledText):
 
 class Window():
     def __init__(self) -> None:
+        """Constructor of window instance"""
 
         # no content in root
         self.root = Tk()
@@ -159,6 +160,7 @@ class Window():
         self.statlbl.pack(fill=X)
 
     def encrypt(self, text, pswd) -> None:
+        """Encrypt text with password then overwrite encrpt_box"""
         text = text.rstrip('\n')
         encrypted = encrypt(
             pswd.encode('utf-8'),
@@ -168,6 +170,7 @@ class Window():
         self.encrpt_box.insert('1.0', encrypted)
 
     def decrypt(self, text, pswd) -> None:
+        """Decrypt text with password then overwrite decrpt_box"""
         encrypted = decrypt(
             pswd.encode('utf-8'),
             text,
@@ -176,5 +179,6 @@ class Window():
         self.decrpt_box.insert('1.0', encrypted.decode('utf-8'))
 
     def start_loop(self) -> None:
+        """Main loop, if the window is deleted root is also destroyed"""
         self.window.protocol('WM_DELETE_WINDOW', self.root.destroy)
         self.root.mainloop()
