@@ -139,24 +139,24 @@ class Window():
         self.decrpt_box.pack(side=LEFT)
         self.encrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
         self.encrpt_box.pack(side=RIGHT)
-        self.butframe = Frame(self.textframe)
+        # self.butframe = Frame(self.passframe)
         self.encrypt_button = Button(
-            self.butframe, text="->",
+            self.passframe, text="->",
             command=lambda: self.encrypt(self.decrpt_box.get('1.0', END), self.pswdbox.get()))
         self.decrypt_button = Button(
-            self.butframe, text="<-",
+            self.passframe, text="<-",
             command=lambda: self.decrypt(self.encrpt_box.get('1.0', END), self.pswdbox.get()))
         self.exit_button = Button(
-            self.butframe, text="x",
+            self.passframe, text="x",
             command=self.root.destroy)
-        self.butframe.pack()
-        self.encrypt_button.pack()
-        self.decrypt_button.pack()
-        self.exit_button.pack()
+        # self.passframe.pack()
 
         # lower row
         self.pswdbox = EntryWithPlaceholder(self.passframe, 'password')
-        self.pswdbox.pack()
+        self.decrypt_button.pack(fill=X, side=LEFT)
+        self.pswdbox.pack(fill=X, side=LEFT)
+        self.encrypt_button.pack(fill=X, side=LEFT)
+        self.exit_button.pack(fill=X, side=RIGHT)
 
         # status row
         self.statlbl = Label(self.statframe, text='Status: Ready.')
