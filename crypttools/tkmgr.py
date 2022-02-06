@@ -122,19 +122,19 @@ class Window():
         self.window = Toplevel(self.root)
         self.window.title("Encrypter")
 
-        # upper row with decrypted/encrypted texts and buttons
-        self.textframe = Frame(self.window)
-        self.textframe.pack()
-
-        # lower row with password textbox
+        # top line with password textbox and buttons
         self.passframe = Frame(self.window)
         self.passframe.pack()
 
-        # status row
+        # middle line with decrypted/encrypted texts and buttons
+        self.textframe = Frame(self.window)
+        self.textframe.pack()
+
+        # bottom line with status
         self.statframe = Frame(self.window, bd=1)
         self.statframe.pack(side=LEFT)
 
-        # upper row
+        # middle line
         self.decrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
         self.decrpt_box.pack(side=LEFT)
         self.encrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
@@ -151,14 +151,14 @@ class Window():
         #     command=self.root.destroy)
         # self.passframe.pack()
 
-        # lower row
+        # top line
         self.pswdbox = EntryWithPlaceholder(self.passframe, 'password')
         self.decrypt_button.pack(fill=X, side=LEFT)
         self.pswdbox.pack(fill=X, side=LEFT)
         self.encrypt_button.pack(fill=X, side=LEFT)
         # self.exit_button.pack(fill=X, side=RIGHT)
 
-        # status row
+        # bottom line
         self.statlbl = Label(self.statframe, text='Status: Ready.')
         self.statlbl.pack(fill=X)
 
