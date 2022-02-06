@@ -6,6 +6,7 @@ importlib-metadata==4.8.1
 Naked==0.1.31
 pycryptodome==3.11.0
 PyYAML==6.0
+pyperclip==1.8.2
 requests==2.26.0
 shellescape==3.8.1
 urllib3==1.26.7

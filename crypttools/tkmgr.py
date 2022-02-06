@@ -15,6 +15,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto import Random
+import pyperclip
 
 
 def encrypt(key, source, encode=True):
@@ -168,8 +169,9 @@ class Window():
             encode=True)
         self.encrpt_box.delete('1.0', END)
         self.encrpt_box.insert('1.0', encrypted)
+        pyperclip.copy(encrypted)
         self.statlbl.config(
-            text='Successfully encrypted.')
+            text='Successfully encrypted and copied to clipboard.')
 
     def decrypt(self, text, pswd) -> None:
         """Decrypt text with password then overwrite decrpt_box"""
@@ -180,8 +182,9 @@ class Window():
                 decode=True)
             self.decrpt_box.delete('1.0', END)
             self.decrpt_box.insert('1.0', encrypted.decode('utf-8'))
+            pyperclip.copy(encrypted.decode('utf-8'))
             self.statlbl.config(
-                text='Successfully decripted.')
+                text='Successfully decripted and copied to clipboard.')
         except ValueError:
             self.statlbl.config(
                 text='Password or encrypted text is incorrect.')
