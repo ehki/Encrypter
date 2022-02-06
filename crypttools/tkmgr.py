@@ -146,9 +146,9 @@ class Window():
         self.decrypt_button = Button(
             self.passframe, text="<-",
             command=lambda: self.decrypt(self.encrpt_box.get('1.0', END), self.pswdbox.get()))
-        self.exit_button = Button(
-            self.passframe, text="x",
-            command=self.root.destroy)
+        # self.exit_button = Button(
+        #     self.passframe, text="x",
+        #     command=self.root.destroy)
         # self.passframe.pack()
 
         # lower row
@@ -156,7 +156,7 @@ class Window():
         self.decrypt_button.pack(fill=X, side=LEFT)
         self.pswdbox.pack(fill=X, side=LEFT)
         self.encrypt_button.pack(fill=X, side=LEFT)
-        self.exit_button.pack(fill=X, side=RIGHT)
+        # self.exit_button.pack(fill=X, side=RIGHT)
 
         # status row
         self.statlbl = Label(self.statframe, text='Status: Ready.')
