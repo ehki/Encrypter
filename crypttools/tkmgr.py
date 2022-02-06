@@ -156,7 +156,7 @@ class Window():
         self.encrypt_button.pack(fill=X, side=LEFT)
 
         # bottom line
-        self.statlbl = Label(self.statframe, text='Status: Ready.')
+        self.statlbl = Label(self.statframe, text='Ready.')
         self.statlbl.pack(fill=X)
 
     def encrypt(self, text, pswd) -> None:
@@ -168,15 +168,23 @@ class Window():
             encode=True)
         self.encrpt_box.delete('1.0', END)
         self.encrpt_box.insert('1.0', encrypted)
+        self.statlbl.config(
+            text='Successfully encrypted.')
 
     def decrypt(self, text, pswd) -> None:
         """Decrypt text with password then overwrite decrpt_box"""
-        encrypted = decrypt(
-            pswd.encode('utf-8'),
-            text,
-            decode=True)
-        self.decrpt_box.delete('1.0', END)
-        self.decrpt_box.insert('1.0', encrypted.decode('utf-8'))
+        try:
+            encrypted = decrypt(
+                pswd.encode('utf-8'),
+                text,
+                decode=True)
+            self.decrpt_box.delete('1.0', END)
+            self.decrpt_box.insert('1.0', encrypted.decode('utf-8'))
+            self.statlbl.config(
+                text='Successfully decripted.')
+        except ValueError:
+            self.statlbl.config(
+                text='Password or encrypted text is incorrect.')
 
     def start_loop(self) -> None:
         """Main loop, if the window is deleted root is also destroyed"""
