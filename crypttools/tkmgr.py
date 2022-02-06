@@ -8,6 +8,10 @@ from tkinter import (
     scrolledtext,
     Tk,
     Toplevel,
+    Label,
+    SUNKEN,
+    W,
+    X,
 )
 import base64
 from Crypto.Cipher import AES
@@ -126,6 +130,10 @@ class Window():
         self.passframe = Frame(self.window)
         self.passframe.pack()
 
+        # status row
+        self.statframe = Frame(self.window, bd=1)
+        self.statframe.pack(side=LEFT)
+
         # upper row
         self.decrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
         self.decrpt_box.pack(side=LEFT)
@@ -149,7 +157,11 @@ class Window():
         # lower row
         self.pswdbox = EntryWithPlaceholder(self.passframe, 'password')
         self.pswdbox.pack()
-  
+
+        # status row
+        self.statlbl = Label(self.statframe, text='Status: Ready.')
+        self.statlbl.pack(fill=X)
+
     def encrypt(self, text, pswd) -> None:
         text = text.rstrip('\n')
         encrypted = encrypt(
