@@ -9,8 +9,6 @@ from tkinter import (
     Tk,
     Toplevel,
     Label,
-    SUNKEN,
-    W,
     X,
 )
 import base64
@@ -92,7 +90,7 @@ class ScrolledTextWithPlaceholder(scrolledtext.ScrolledText):
         self.bind("<FocusOut>", self.foc_out)
 
         self.put_placeholder()
-    
+
     def delete(self, index1, index2) -> None:
         self['fg'] = self.default_fg_color
         return super().delete(index1, index2=index2)
@@ -135,28 +133,26 @@ class Window():
         self.statframe.pack(side=LEFT)
 
         # middle line
-        self.decrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Decrypted text')
+        self.decrpt_box = ScrolledTextWithPlaceholder(
+            self.textframe, 'Decrypted text')
         self.decrpt_box.pack(side=LEFT)
-        self.encrpt_box = ScrolledTextWithPlaceholder(self.textframe, 'Encrypted text')
+        self.encrpt_box = ScrolledTextWithPlaceholder(
+            self.textframe, 'Encrypted text')
         self.encrpt_box.pack(side=RIGHT)
-        # self.butframe = Frame(self.passframe)
         self.encrypt_button = Button(
             self.passframe, text="->",
-            command=lambda: self.encrypt(self.decrpt_box.get('1.0', END), self.pswdbox.get()))
+            command=lambda: self.encrypt(
+                self.decrpt_box.get('1.0', END), self.pswdbox.get()))
         self.decrypt_button = Button(
             self.passframe, text="<-",
-            command=lambda: self.decrypt(self.encrpt_box.get('1.0', END), self.pswdbox.get()))
-        # self.exit_button = Button(
-        #     self.passframe, text="x",
-        #     command=self.root.destroy)
-        # self.passframe.pack()
+            command=lambda: self.decrypt(
+                self.encrpt_box.get('1.0', END), self.pswdbox.get()))
 
         # top line
         self.pswdbox = EntryWithPlaceholder(self.passframe, 'password')
         self.decrypt_button.pack(fill=X, side=LEFT)
         self.pswdbox.pack(fill=X, side=LEFT)
         self.encrypt_button.pack(fill=X, side=LEFT)
-        # self.exit_button.pack(fill=X, side=RIGHT)
 
         # bottom line
         self.statlbl = Label(self.statframe, text='Status: Ready.')
